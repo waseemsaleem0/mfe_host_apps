@@ -1,0 +1,67 @@
+{
+  "name": "api-service1",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "api-service1/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/api-service1",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "api-service1/src/main.ts",
+        "tsConfig": "api-service1/tsconfig.app.json",
+        "assets": ["api-service1/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "api-service1:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "api-service1:build:development"
+        },
+        "production": {
+          "buildTarget": "api-service1:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "api-service1/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
