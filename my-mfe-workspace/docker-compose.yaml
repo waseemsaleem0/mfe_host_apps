@@ -25,3 +25,18 @@ services:
     image: mfe-remote2:latest
     ports:
       - "4202:80"
+  api-service1:
+    build:
+      context: .
+      dockerfile: Dockerfile.api-service1
+    image: api-service1:latest
+    ports:
+      - "3000:3000"
+
+  api-service2:
+    build:
+      context: .
+      dockerfile: Dockerfile.api-service2
+    image: api-service2:latest
+    ports:
+      - "3001:3001"
