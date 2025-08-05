@@ -3,7 +3,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm install --legacy-peer-deps
-
+RUN npm install -g nx
 COPY . .
 
 RUN npx nx build api-service2

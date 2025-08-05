@@ -5,7 +5,6 @@ WORKDIR /app
 # Copy only package files and install dependencies (cache efficient)
 COPY package.json package-lock.json ./
 RUN for i in 1 2 3; do npm install --legacy-peer-deps && break || sleep 10; done
-
 # Copy the rest of the workspace
 COPY . .
 
