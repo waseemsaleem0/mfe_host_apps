@@ -1,0 +1,11 @@
+mfeHost:
+  image: your-dockerhub-username/mfe-host:latest
+  port: 4200
+
+mfeRemote1:
+  image: your-dockerhub-username/mfe-remote1:latest
+  port: 4201
+
+mfeRemote2:
+  image: your-dockerhub-username/mfe-remote2:latest
+  port: 4202

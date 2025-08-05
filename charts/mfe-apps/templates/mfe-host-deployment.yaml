@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mfe-host
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mfe-host
+  template:
+    metadata:
+      labels:
+        app: mfe-host
+    spec:
+      containers:
+        - name: mfe-host
+          image: {{ .Values.mfeHost.image }}
+          ports:
+            - containerPort: {{ .Values.mfeHost.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mfe-host
+spec:
+  selector:
+    app: mfe-host
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.mfeHost.port }}

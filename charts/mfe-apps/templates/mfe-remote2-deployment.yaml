@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mfe-remote2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mfe-remote2
+  template:
+    metadata:
+      labels:
+        app: mfe-remote2
+    spec:
+      containers:
+        - name: mfe-remote2
+          image: {{ .Values.mfeRemote2.image }}
+          ports:
+            - containerPort: {{ .Values.mfeRemote2.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mfe-remote2
+spec:
+  selector:
+    app: mfe-remote2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.mfeRemote2.port }}

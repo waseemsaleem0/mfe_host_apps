@@ -1,0 +1,27 @@
+services:
+  mfe-host:
+    build:
+      context: .
+      dockerfile: Dockerfile.mfe-host
+    image: mfe-host:latest
+    ports:
+      - "4200:80"
+    depends_on:
+      - mfe-remote1
+      - mfe-remote2
+
+  mfe-remote1:
+    build:
+      context: .
+      dockerfile: Dockerfile.mfe_remote1
+    image: mfe-remote1:latest
+    ports:
+      - "4201:80"
+
+  mfe-remote2:
+    build:
+      context: .
+      dockerfile: Dockerfile.mfe_remote2
+    image: mfe-remote2:latest
+    ports:
+      - "4202:80"
